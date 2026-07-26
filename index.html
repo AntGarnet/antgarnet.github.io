@@ -1,3 +1,362 @@
+<<<<<<< HEAD
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dropdown Sections With Code Tabs — Complete Project</title>
+    <!------------------------------------>
+    >
+
+    <style>
+      body {
+        background: #121212;
+        color: #f0f0f0;
+        font-family: Consolas, monospace;
+        padding: 30px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #4fc3f7;
+        margin-bottom: 40px;
+      }
+
+      /* DROPDOWN */
+      .section {
+        border: 1px solid #444;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        background: #1e1e1e;
+        overflow: hidden;
+      }
+
+      .section-header {
+        width: 100%;
+        background: #2d2d2d;
+        padding: 14px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        color: #fff;
+      }
+
+      .section-header::after {
+        content: "▶";
+        transition: transform 0.25s ease;
+      }
+
+      .section.open .section-header::after {
+        transform: rotate(90deg);
+      }
+
+      .section-body {
+        height: 0;
+        overflow: hidden;
+        padding: 0 16px;
+        background: #252525;
+        transition: height 0.25s ease-out;
+      }
+
+      /* TABS */
+      .tab-bar {
+        display: flex;
+        margin-top: 12px;
+        border-bottom: 1px solid #444;
+      }
+
+      .tab {
+        padding: 8px 14px;
+        cursor: pointer;
+        background: #333;
+        color: #ccc;
+        border-right: 1px solid #444;
+        user-select: none;
+      }
+
+      .tab.active {
+        background: #4fc3f7;
+        color: #000;
+        font-weight: bold;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 14px 0;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      pre {
+        background: #000;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        color: #4fc3f7;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dropdown Sections With Code Tabs — Complete Project</h1>
+
+    <!-- DROPDOWN 1 -->
+    <div class="section">
+      <button class="section-header">HTML Section</button>
+      <div class="section-body">
+        <div class="tab-bar">
+          <div class="tab active" data-tab="html1">HTML</div>
+          <div class="tab" data-tab="css1">CSS</div>
+          <div class="tab" data-tab="js1">JS</div>
+        </div>
+
+        <div class="tab-content active" data-content="html1">
+          <pre><code>&lt;div class="box"&gt;Hello HTML&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="tab-content" data-content="css1">
+          <pre><code>.box {
+    padding: 20px;
+    background: #333;
+}</code></pre>
+        </div>
+
+        <div class="tab-content" data-content="js1">
+          <pre><code>// Example JS for HTML section
+document.querySelectorAll('.box').forEach(b =&gt; {
+    console.log("HTML box loaded:", b);
+});</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DROPDOWN 2 -->
+    <div class="section">
+      <button class="section-header">CSS Section</button>
+      <div class="section-body">
+        <div class="tab-bar">
+          <div class="tab active" data-tab="html2">HTML</div>
+          <div class="tab" data-tab="css2">CSS</div>
+          <div class="tab" data-tab="js2">JS</div>
+        </div>
+
+        <div class="tab-content active" data-content="html2">
+          <pre><code>&lt;div class="panel"&gt;CSS Example&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="tab-content" data-content="css2">
+          <pre><code>.panel {
+    border: 1px solid #4fc3f7;
+    padding: 10px;
+}</code></pre>
+        </div>
+
+        <div class="tab-content" data-content="js2">
+          <pre><code>// Example JS for CSS section
+console.log("CSS panel ready");</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DROPDOWN 3 -->
+    <div class="section">
+      <button class="section-header">
+        JavaScript Section (Full Dropdown Engine)
+      </button>
+      <div class="section-body">
+        <div class="tab-bar">
+          <div class="tab active" data-tab="html3">HTML</div>
+          <div class="tab" data-tab="css3">CSS</div>
+          <div class="tab" data-tab="js3">JS</div>
+        </div>
+
+        <div class="tab-content active" data-content="html3">
+          <pre><code>&lt;button id="btn"&gt;Click Me&lt;/button&gt;</code></pre>
+        </div>
+
+        <div class="tab-content" data-content="css3">
+          <pre><code>#btn {
+    background: #4fc3f7;
+    padding: 10px;
+}</code></pre>
+        </div>
+
+        <!-- THIS IS THE FULL ENGINE YOU EXPECTED -->
+        <div class="tab-content" data-content="js3">
+          <pre><code>class SectionDropdowns {
+    constructor(root) {
+        this.root = root;
+        this.sections = root.querySelectorAll('.section');
+        this.init();
+    }
+
+    init() {
+        this.sections.forEach(section =&gt; {
+            const header = section.querySelector('.section-header');
+            const body = section.querySelector('.section-body');
+
+            body.style.height = '0px';
+            body.hidden = true;
+
+            header.addEventListener('click', () =&gt; {
+                this.toggleSection(section);
+            });
+        });
+    }
+
+    toggleSection(section) {
+        const body = section.querySelector('.section-body');
+        const isOpen = section.classList.contains('open');
+
+        if (isOpen) {
+            this.closeSection(section);
+        } else {
+            this.openSection(section);
+        }
+    }
+
+    openSection(section) {
+        const body = section.querySelector('.section-body');
+
+        section.classList.add('open');
+        body.hidden = false;
+        body.style.height = body.scrollHeight + 'px';
+
+        body.addEventListener('transitionend', function handler() {
+            if (section.classList.contains('open')) {
+                body.style.height = 'auto';
+            }
+            body.removeEventListener('transitionend', handler);
+        });
+    }
+
+    closeSection(section) {
+        const body = section.querySelector('.section-body');
+
+        section.classList.remove('open');
+
+        if (body.style.height === 'auto') {
+            body.style.height = body.scrollHeight + 'px';
+        }
+
+        requestAnimationFrame(() =&gt; {
+            body.style.height = '0px';
+        });
+
+        body.addEventListener('transitionend', function handler() {
+            if (!section.classList.contains('open')) {
+                body.hidden = true;
+            }
+            body.removeEventListener('transitionend', handler);
+        });
+    }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* DROPDOWN ENGINE */
+      class SectionDropdowns {
+        constructor(root) {
+          this.root = root;
+          this.sections = root.querySelectorAll(".section");
+          this.init();
+        }
+
+        init() {
+          this.sections.forEach((section) => {
+            const header = section.querySelector(".section-header");
+            const body = section.querySelector(".section-body");
+
+            body.style.height = "0px";
+            body.hidden = true;
+
+            header.addEventListener("click", () => {
+              this.toggleSection(section);
+            });
+          });
+        }
+
+        toggleSection(section) {
+          const body = section.querySelector(".section-body");
+          const isOpen = section.classList.contains("open");
+
+          if (isOpen) {
+            this.closeSection(section);
+          } else {
+            this.openSection(section);
+          }
+        }
+
+        openSection(section) {
+          const body = section.querySelector(".section-body");
+          section.classList.add("open");
+          body.hidden = false;
+          body.style.height = body.scrollHeight + "px";
+
+          body.addEventListener("transitionend", function handler() {
+            if (section.classList.contains("open")) {
+              body.style.height = "auto";
+            }
+            body.removeEventListener("transitionend", handler);
+          });
+        }
+
+        closeSection(section) {
+          const body = section.querySelector(".section-body");
+          section.classList.remove("open");
+
+          if (body.style.height === "auto") {
+            body.style.height = body.scrollHeight + "px";
+          }
+
+          requestAnimationFrame(() => {
+            body.style.height = "0px";
+          });
+
+          body.addEventListener("transitionend", function handler() {
+            if (!section.classList.contains("open")) {
+              body.hidden = true;
+            }
+            body.removeEventListener("transitionend", handler);
+          });
+        }
+      }
+
+      /* TAB LOGIC */
+      document.addEventListener("DOMContentLoaded", () => {
+        new SectionDropdowns(document.body);
+
+        const tabs = document.querySelectorAll(".tab");
+        const contents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const target = tab.dataset.tab;
+
+            const group = tab.closest(".section-body");
+            const groupTabs = group.querySelectorAll(".tab");
+            const groupContents = group.querySelectorAll(".tab-content");
+
+            groupTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            groupContents.forEach((c) => {
+              c.classList.toggle("active", c.dataset.content === target);
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+=======
 <!doctype html>
 <html lang="en">
   <head>
@@ -353,3 +712,4 @@ console.log("CSS panel ready");</code></pre>
     </script>
   </body>
 </html>
+>>>>>>> 1c4273e58df136454adf45e8ecd01cddee1d75cd
